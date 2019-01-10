@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ljzn.grpc.visitor";
+option objc_class_prefix = "VISITOR";
+
+
+import "visitor/visitor.message.proto";
+
+package VisitorSystem;
+
+
+message VisitorUploadRequest {
+    VisitorMessage visitor=1;
+}
+
+message VisitorUploadResponce{
+    int32 code = 1;
+    string message = 2;
+   
+}
+
+message VisitInfoUploadRequest{
+    VisitInfoMessage visitInfo=1;
+    
+}
+
+message VisitInfoUploadResponce{
+    int32 code = 1;
+    string message = 2;
+}
+
+message VisitInfoDownloadRequest{
+    int64 version = 1;
+    int32 belongId = 2;
+}
+
+message VisitInfoDownloadResponce{
+    int32 code = 1;
+    string message = 2;
+    repeated VisitInfoMessage visitInfoMessages = 3; //返回所有非本机的系统版本大于本机版本的访问记录
+}
+
+message CheckOutRequest{
+    CheckOutMessage checkOutMessage = 1;
+}
+
+message CheckOutResponce{
+    int32 code = 1;
+    string message = 2; 
+}
+
+service VisitorAuthService{
+    rpc VisitorUpload(VisitorUploadRequest) returns (VisitorUploadResponce){};
+    rpc VisitInfoUpload(VisitInfoUploadRequest) returns (VisitInfoUploadResponce){};
+    rpc VisitInfoDownload(VisitInfoDownloadRequest) returns (VisitInfoDownloadResponce){};
+    rpc CheckOut(CheckOutRequest) returns (CheckOutResponce){};
+}
