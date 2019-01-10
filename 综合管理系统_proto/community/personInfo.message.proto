@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ljzn.grpc.community";
+option objc_class_prefix = "COMMUNITY";
+
+package CommunitySystem;
+
+enum  PersonType{
+            WhiteList = 0 ; //白名单人员 默认
+            BlackList = 1 ; //黑名单人员
+}
+message  PersonInfoMessage{
+  string  cardId = 1;  //身份证号
+  string  name = 2 ;//姓名
+  bytes   cameraPhoto =3 ; //现场照片
+  int64   featureLen = 4 ; //人脸特征值长度windows ,Andriod设备此值为null
+  repeated   float feature =5; //人脸特征值windows,Andriod设备此值为null
+  int64   version = 6 ;//版本号
+  int32  action = 7 ; //操作 -1删除 1 增加 2更新
+  PersonType   persontype  = 8 ; //人员类型
+}

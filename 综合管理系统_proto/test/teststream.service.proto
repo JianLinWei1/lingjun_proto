@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ljzn.grpc.test";
+option objc_class_prefix = "TEST";
+
+
+
+
+package Test;
+
+message Request{
+  string str = 1 ;
+}
+
+message Response{
+  string  msg  = 1 ;
+}
+
+service  Test{
+      rpc  test(stream Request) returns ( stream Response){};
+} 

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ljzn.grpc.community";
+option objc_class_prefix = "COMMUNITY";
+
+import "community/personInfo.message.proto";
+
+
+package CommunitySystem;
+
+message CommunityPersonInfoRequest{
+      int32 platform = 1 ;//平台,windows请求则传"1",Andriod请求则传"2"
+      int64 version = 2;//版本号；是0则返回全部,反之返回所有大于此值的数据
+       string belongId = 3 ;//属于服务,本地局域网默认ljadmin
+       string deviceSeril = 4 ;//设备序列号
+}
+
+message CommunityPersonInfoResponse{
+      int32 code = 1 ; //返回码(此系统统一GRPC接口返回码 成功为1 ,失败为-1)
+      string message =2 ;//返回信息(编码UTF-8)
+      repeated PersonInfoMessage personInfoMessage = 3 ; //人员信息
+}
+
+service  CommunityPersonInfoAuthService{
+ rpc  GetCommunituPersonInfo(CommunityPersonInfoRequest) returns (CommunityPersonInfoResponse){};
+}

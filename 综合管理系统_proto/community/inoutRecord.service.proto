@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ljzn.grpc.community";
+option objc_class_prefix = "COMMUNITY";
+
+package CommunitySystem;
+
+message inoutRecordMessage{
+   string cardId = 1 ; //比对人员身份证
+   float  compareScore = 2 ; //比对分值
+   bytes  camreaPhoto = 3 ; //比对现场照片
+   bytes  camreaFeature = 4 ;//现场照片特征值
+   string  belongId  = 5 ;  //由于系统在开发中如果误删自增id不好搞 所以改为String
+   string inoutTime = 6 ; //进出时间  ,yyyy-MM-dd HH:mm:ss 格式
+   string  inoutType = 7 ; //进出类型   "进 "  "出"
+   string  deviceSeril = 8 ; //设备序列号
+   
+
+}
+
+message inoutRecordUploadRequest{
+      repeated  inoutRecordMessage   inoutrecordMessage  = 1 ;
+}
+
+message inoutRecordUploadResponse{
+    int32 code = 1 ;
+    string message = 2 ;
+}
+
+service inoutRecordUploadAuthService{
+    rpc  inoutRecordUpload(inoutRecordUploadRequest) returns (inoutRecordUploadResponse){}
+}

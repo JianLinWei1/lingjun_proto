@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ljzn.grpc.attence";
+option objc_class_prefix = "ATTENCE";
+
+package AttenceSystem; 
+
+   
+message  AttenceMessage{
+  string  employeeId = 1; //工号
+  string name =2 ;  //姓名
+  string workDate=3; //yy-MM-dd HH:mm:ss
+  string camreaIp = 4; //设备相机IP
+  bytes camreaPhoto = 5; //现场照片
+  string belongId = 6 ;
+  string deviceSeril = 7 ; //设备序列号
+}
+
+message  EmployeeInfo{
+   string employeeId = 1 ; //工号
+   string name = 2 ;  //姓名
+   bytes  photoFeature = 3 ;  // 照片特征(现只支持windows)
+   int64  version = 4 ; //版本
+   string ICcard =5 ;  //IC卡号
+   int64  action  = 6; //1 是新增  2 是更新   -1是删除
+   int64   featureLen = 7 ; //特征长度 (windows)
+   repeated   float feature =8; //特征值(windows)
+   bytes  photo  = 9 ; //照片
+   
+}
+
